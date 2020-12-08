@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -15,25 +16,47 @@ public class MainActivity extends AppCompatActivity {
     TextView timerTextView;
     SeekBar timerSeekBar;
 
+    Boolean counterIsActive = false;
+    Button goButt;
+
+    CountDownTimer countDownTimer;
+
+    public void resetTimer() {
+
+        timerTextView.setText("0:30");
+        timerSeekBar.setProgress(30);
+        timerSeekBar.setEnabled(true);
+        countDownTimer.cancel();
+        goButt.setText("GO BABY!");
+        counterIsActive = false;
+
+    }
+
     public void buttonClicked(View view) {
-        CountDownTimer countDownTimer = new CountDownTimer(timerSeekBar.getProgress() * 1000 + 100,1000) {
 
-            @Override
-            public void onTick(long millisUntilFinished) {
-                updateTimer((int) millisUntilFinished / 1000);
-            }
+        if (counterIsActive) {
+            resetTimer();
+        } else {
+            counterIsActive = true;
+            timerSeekBar.setEnabled(false);
+            goButt.setText("ESTOP!");
+            countDownTimer = new CountDownTimer(timerSeekBar.getProgress() * 1000 + 100, 1000) {
 
-            @Override
-            public void onFinish() {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    updateTimer((int) millisUntilFinished / 1000);
+                }
 
-                MediaPlayer mPlayer = MediaPlayer.create(getApplicationContext(),R.raw.egg_timer_ding);
-                mPlayer.start();
-                timerTextView.setText("0:00");
+                @Override
+                public void onFinish() {
 
-
-
-            }
-        }.start();
+                    MediaPlayer mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.egg_timer_ding);
+                    mPlayer.start();
+                    timerTextView.setText("0:00");
+                    resetTimer();
+                }
+            }.start();
+        }
     }
 
     public void updateTimer(int secondsLeft) {
@@ -59,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
          timerSeekBar = findViewById(R.id.timerSeekBar);
          timerTextView = findViewById(R.id.countdownTextView);
+         goButt = findViewById(R.id.goButton);
 
         //60 secs in a min therefore 600 for 10 min max.
         timerSeekBar.setMax(600);
