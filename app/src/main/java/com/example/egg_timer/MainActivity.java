@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFinish() {
 
-                    MediaPlayer mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.atlas_jam_one);
+                    MediaPlayer mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.atlas_jam_two);
                     mPlayer.start();
                     timerTextView.setText("0:00");
                     resetTimer();
