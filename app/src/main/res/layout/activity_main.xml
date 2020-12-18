@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timerSeekBar"
-        app:srcCompat="@drawable/egg_timer_image" />
+        app:srcCompat="@drawable/atlas_full_pic" />
 
     <SeekBar
         android:id="@+id/timerSeekBar"

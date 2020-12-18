@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             counterIsActive = true;
             timerSeekBar.setEnabled(false);
             goButt.setText("ESTOP!");
+
             countDownTimer = new CountDownTimer(timerSeekBar.getProgress() * 1000 + 100, 1000) {
 
                 @Override
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFinish() {
 
-                    MediaPlayer mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.egg_timer_ding);
+                    MediaPlayer mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.atlas_jam_one);
                     mPlayer.start();
                     timerTextView.setText("0:00");
                     resetTimer();
